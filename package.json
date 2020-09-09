@@ -1,0 +1,89 @@
+{
+  "private": true,
+  "name": "theia-example",
+  "productName": "Theia Electron Example Application",
+  "version": "1.5.0",
+  "main": "src-gen/frontend/electron-main.js",
+  "license": "EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0",
+  "author": "Rob Moran <github@thegecko.org>",
+  "homepage": "https://github.com/eclipse-theia/theia-example#readme",
+  "bugs": {
+    "url": "https://github.com/eclipse-theia/theia/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eclipse-theia/theia-example.git"
+  },
+  "engines": {
+    "yarn": "1.0.x || >=1.2.1",
+    "node": ">=12.14.1 <13"
+  },
+  "theia": {
+    "target": "electron",
+    "frontend": {
+      "config": {
+        "applicationName": "Theia Electron Example Application"
+      }
+    },
+    "backend": {
+      "config": {
+        "startupTimeout": -1
+      }
+    }
+  },
+  "dependencies": {
+    "@theia/callhierarchy": "next",
+    "@theia/console": "next",
+    "@theia/core": "next",
+    "@theia/debug": "next",
+    "@theia/editor": "next",
+    "@theia/editor-preview": "next",
+    "@theia/electron": "next",
+    "@theia/file-search": "next",
+    "@theia/filesystem": "next",
+    "@theia/getting-started": "next",
+    "@theia/git": "next",
+    "@theia/keymaps": "next",
+    "@theia/markers": "next",
+    "@theia/messages": "next",
+    "@theia/metrics": "next",
+    "@theia/mini-browser": "next",
+    "@theia/monaco": "next",
+    "@theia/navigator": "next",
+    "@theia/outline-view": "next",
+    "@theia/output": "next",
+    "@theia/plugin-dev": "next",
+    "@theia/plugin-ext": "next",
+    "@theia/plugin-ext-vscode": "next",
+    "@theia/preferences": "next",
+    "@theia/preview": "next",
+    "@theia/process": "next",
+    "@theia/scm": "next",
+    "@theia/scm-extra": "next",
+    "@theia/search-in-workspace": "next",
+    "@theia/task": "next",
+    "@theia/terminal": "next",
+    "@theia/typehierarchy": "next",
+    "@theia/userstorage": "next",
+    "@theia/variable-resolver": "next",
+    "@theia/vsx-registry": "next",
+    "@theia/workspace": "next"
+  },
+  "devDependencies": {
+    "@theia/cli": "next",
+    "electron-builder": "^22.8.0"
+  },
+  "scripts": {
+    "prepare": "yarn build",
+    "lint": "theiaext lint",
+    "clean": "theia clean",
+    "build": "theia rebuild:electron && yarn bundle",
+    "bundle": "theia build",
+    "watch": "concurrently -n compile,bundle \"theiaext watch --preserveWatchOutput\" \"theia build --watch --mode development\"",
+    "start": "theia start --plugins=local-dir:../../plugins",
+    "start:debug": "yarn start --log-level=debug",
+    "test": "electron-mocha --timeout 60000 \"./lib/test/**/*.espec.js\"",
+    "package": "electron-builder -c.mac.identity=null --publish never",
+    "package:preview": "electron-builder --dir"
+  }
+}
